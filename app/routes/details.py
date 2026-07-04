@@ -7,10 +7,8 @@ router = APIRouter()
 
 @router.get("/debug/details")
 async def debug_details():
+
     return {
-        "signature": str(inspect.signature(ItemDetails)),
-        "methods": [
-            m for m in dir(ItemDetails)
-            if not m.startswith("__")
-        ]
+        "get_content_model": str(inspect.signature(ItemDetails.get_content_model)),
+        "get_content": str(inspect.signature(ItemDetails.get_content)),
     }
