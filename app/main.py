@@ -46,3 +46,17 @@ async def providers():
             "enabled": True,
         }
     ]
+  @app.get("/debug/moviebox")
+async def debug_moviebox():
+    try:
+        import moviebox_api
+
+        return {
+            "installed": True,
+            "module": moviebox_api.__name__,
+        }
+    except Exception as e:
+        return {
+            "installed": False,
+            "error": str(e),
+        }
