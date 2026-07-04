@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.routes.home import router as home_router
+
 app = FastAPI(
     title="ZenkaiOS Backend",
     version="1.0.0",
@@ -12,7 +14,10 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+
 )
+
+app.include_router(home_router)
 
 
 @app.get("/")
