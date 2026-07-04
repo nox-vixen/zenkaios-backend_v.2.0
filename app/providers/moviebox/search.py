@@ -1,9 +1,8 @@
 import inspect
-from moviebox_api.v2 import Search
-
+from moviebox_api.v2 import Session
 
 async def search(query: str):
     return {
-        "signature": str(inspect.signature(Search)),
-        "methods": dir(Search),
+        "signature": str(inspect.signature(Session)),
+        "methods": dir(Session),
     }
