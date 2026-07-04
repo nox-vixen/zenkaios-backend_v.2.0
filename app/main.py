@@ -51,15 +51,20 @@ async def providers():
 @app.get("/debug/moviebox")
 async def debug_moviebox():
     try:
-        import moviebox_api
+        import importlib
 
-        return {
-            "installed": True,
-            "module": moviebox_api.__name__,
-            "members": sorted(dir(moviebox_api)),
-        }
+        result = {}
+
+        for version in ["v1", "v2", "v3"]:
+            try:
+                module = importlib.import_module(f"moviebox_api.{version}")
+                result[version] = sorted(dir(module))
+            except Exception as e:
+                result[version] = str(e)
+
+        return result
+
     except Exception as e:
         return {
-            "installed": False,
             "error": str(e),
         }
