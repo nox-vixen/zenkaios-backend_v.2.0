@@ -6,6 +6,9 @@ from app.routes.search import router as search_router
 from app.routes.details import router as details_router
 from app.routes.debug import router as debug_router
 from app.routes.episodes import router as episodes_router
+from app.routes.debug import router as debug_router
+
+
 
 app = FastAPI(
     title="ZenkaiOS Backend",
@@ -26,6 +29,7 @@ app.include_router(search_router)
 app.include_router(details_router)
 app.include_router(debug_router)
 app.include_router(episodes_router)
+app.include_router(debug_router)
 
 
 @app.get("/")
