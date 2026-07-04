@@ -46,7 +46,9 @@ async def providers():
             "enabled": True,
         }
     ]
-  @app.get("/debug/moviebox")
+
+
+@app.get("/debug/moviebox")
 async def debug_moviebox():
     try:
         import moviebox_api
