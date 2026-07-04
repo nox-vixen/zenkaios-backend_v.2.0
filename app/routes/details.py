@@ -1,14 +1,13 @@
 from fastapi import APIRouter
-import inspect
-from moviebox_api.v2 import ItemDetails
+
+from app.providers.moviebox.details import get_details
 
 router = APIRouter()
 
 
-@router.get("/debug/details")
-async def debug_details():
+@router.get("/api/details/{detail_path}")
+async def details(detail_path: str):
 
-    return {
-        "get_content_model": str(inspect.signature(ItemDetails.get_content_model)),
-        "get_content": str(inspect.signature(ItemDetails.get_content)),
-    }
+    data = await get_details(detail_path)
+
+    return data.model_dump()
