@@ -6,5 +6,5 @@ router = APIRouter()
 @router.get("/api/debug")
 async def debug():
     return {
-        "members": dir(m)
+        "module": dir(m)
     }
