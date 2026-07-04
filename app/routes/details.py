@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 import inspect
-import moviebox_api.v2 as mb
+from moviebox_api.v2 import ItemDetails
 
 router = APIRouter()
 
@@ -8,5 +8,9 @@ router = APIRouter()
 @router.get("/debug/details")
 async def debug_details():
     return {
-        "exports": dir(mb),
+        "signature": str(inspect.signature(ItemDetails)),
+        "methods": [
+            m for m in dir(ItemDetails)
+            if not m.startswith("__")
+        ]
     }
