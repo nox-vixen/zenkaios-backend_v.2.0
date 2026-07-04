@@ -51,15 +51,18 @@ async def providers():
 @app.get("/debug/moviebox")
 async def debug_moviebox():
     try:
-        import inspect
         from moviebox_api.v2 import Homepage
 
+        homepage = Homepage()
+
+        data = await homepage.get_content_model()
+
         return {
-            "signature": str(inspect.signature(Homepage)),
-            "methods": [
-                m
-                for m in dir(Homepage)
-                if not m.startswith("_")
+            "type": str(type(data)),
+            "attributes": [
+                attr
+                for attr in dir(data)
+                if not attr.startswith("_")
             ],
         }
 
