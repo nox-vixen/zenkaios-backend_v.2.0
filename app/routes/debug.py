@@ -1,13 +1,11 @@
 from fastapi import APIRouter
-from app.providers.moviebox.details import details
+import inspect
+from moviebox_api.v2 import TVSeriesDetails
 
 router = APIRouter()
 
-@router.get("/api/debug/{detail_path}")
-async def debug(detail_path: str):
-    data = await details.get_content_model(detail_path)
-
+@router.get("/api/debug")
+async def debug():
     return {
-        "type": str(type(data)),
-        "attributes": dir(data)
+        "source": inspect.getsource(TVSeriesDetails)
     }
