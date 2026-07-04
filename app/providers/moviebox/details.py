@@ -5,7 +5,7 @@ details = ItemDetails(session)
 
 
 async def get_details(path: str):
-    data = details.get_content_model(path)
+    data = await details.get_content_model(path)
 
     subject = data.subject
     resource = data.resource
