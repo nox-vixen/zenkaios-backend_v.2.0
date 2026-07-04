@@ -19,7 +19,12 @@ async def home():
 
             for item in section.banner.items:
 
-                hero.append(map_subject(item.subject))
+    subject = getattr(item, "subject", None)
+
+    if subject is None:
+        continue
+
+    hero.append(map_subject(subject))
 
             break
 
