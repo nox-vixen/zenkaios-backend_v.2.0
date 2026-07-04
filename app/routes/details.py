@@ -7,7 +7,4 @@ router = APIRouter()
 
 @router.get("/api/details/{detail_path}")
 async def details(detail_path: str):
-
-    data = await get_details(detail_path)
-
-    return data.model_dump()
+    return await get_details(detail_path)
