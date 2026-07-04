@@ -1,13 +1,13 @@
 from fastapi import APIRouter
-from moviebox_api.v2 import TVSeriesDetails, Session
+from app.providers.moviebox.details import details
 
 router = APIRouter()
 
-session = Session()
-tv = TVSeriesDetails(session)
+@router.get("/api/debug/{detail_path}")
+async def debug(detail_path: str):
+    data = await details.get_content_model(detail_path)
 
-@router.get("/api/debug")
-async def debug():
     return {
-        "methods": [m for m in dir(tv) if not m.startswith("_")]
+        "type": str(type(data)),
+        "attributes": dir(data)
     }
