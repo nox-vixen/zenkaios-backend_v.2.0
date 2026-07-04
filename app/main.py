@@ -7,6 +7,7 @@ from app.routes.details import router as details_router
 from app.routes.debug import router as debug_router
 from app.routes.episodes import router as episodes_router
 from app.routes.debug import router as debug_router
+from app.routes.watch import router as watch_router
 
 
 
@@ -30,6 +31,7 @@ app.include_router(details_router)
 app.include_router(debug_router)
 app.include_router(episodes_router)
 app.include_router(debug_router)
+app.include_router(watch_router)
 
 
 @app.get("/")
