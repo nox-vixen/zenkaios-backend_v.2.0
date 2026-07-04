@@ -1,12 +1,12 @@
 from fastapi import APIRouter
-
-from app.providers.moviebox.details import get_details
+import inspect
+import moviebox_api.v2 as mb
 
 router = APIRouter()
 
 
-@router.get("/api/details/{detail_path}")
-async def details(detail_path: str):
-    data = await get_details(detail_path)
-
-    return data.model_dump()
+@router.get("/debug/details")
+async def debug_details():
+    return {
+        "exports": dir(mb),
+    }
