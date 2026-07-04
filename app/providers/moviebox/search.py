@@ -9,15 +9,14 @@ async def search(query: str):
         query=query,
     )
 
-    try:
-        data = await search.get_content_model()
+    data = await search.get_content_model()
 
-        return {
-            "type": str(type(data)),
-            "attributes": dir(data),
-        }
-
-    except Exception as e:
-        return {
-            "error": str(e),
-        }
+    return {
+        "items_type": str(type(data.items)),
+        "items_length": len(data.items),
+        "first_item": (
+            data.items[0].model_dump()
+            if data.items
+            else None
+        ),
+    }
