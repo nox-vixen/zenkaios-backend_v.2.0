@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
 from app.providers.moviebox.search import search
+from app.providers.moviebox.mapper import map_subject
 
 router = APIRouter()
 
@@ -8,10 +9,13 @@ router = APIRouter()
 @router.get("/api/search")
 async def search_route(q: str):
 
-    data = await search(q)
+    items = await search(q)
+
+    results = []
+
+    for subject in items:
+        results.append(map_subject(subject))
 
     return {
-        "type": str(type(data)),
-        "dir": dir(data),
-        "repr": str(data)[:5000],
+        "results": results
     }
