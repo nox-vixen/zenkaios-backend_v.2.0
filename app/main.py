@@ -54,16 +54,23 @@ async def debug_moviebox():
         from moviebox_api.v2 import Homepage
 
         homepage = Homepage()
-
         data = await homepage.get_content_model()
 
         return {
-            "type": str(type(data)),
-            "attributes": [
-                attr
-                for attr in dir(data)
-                if not attr.startswith("_")
-            ],
+            "operatingList_type": str(type(data.operatingList)),
+            "operatingList_length": len(data.operatingList),
+            "platformList_type": str(type(data.platformList)),
+            "platformList_length": len(data.platformList),
+            "first_operating_item": (
+                data.operatingList[0].model_dump()
+                if data.operatingList
+                else None
+            ),
+            "first_platform_item": (
+                data.platformList[0].model_dump()
+                if data.platformList
+                else None
+            ),
         }
 
     except Exception as e:
