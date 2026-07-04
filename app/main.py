@@ -56,6 +56,7 @@ async def debug_moviebox():
         return {
             "installed": True,
             "module": moviebox_api.__name__,
+            "members": sorted(dir(moviebox_api)),
         }
     except Exception as e:
         return {
