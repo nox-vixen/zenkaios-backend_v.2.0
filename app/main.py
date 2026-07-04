@@ -51,18 +51,17 @@ async def providers():
 @app.get("/debug/moviebox")
 async def debug_moviebox():
     try:
-        import importlib
+        import inspect
+        from moviebox_api.v2 import Homepage
 
-        result = {}
-
-        for version in ["v1", "v2", "v3"]:
-            try:
-                module = importlib.import_module(f"moviebox_api.{version}")
-                result[version] = sorted(dir(module))
-            except Exception as e:
-                result[version] = str(e)
-
-        return result
+        return {
+            "signature": str(inspect.signature(Homepage)),
+            "methods": [
+                m
+                for m in dir(Homepage)
+                if not m.startswith("_")
+            ],
+        }
 
     except Exception as e:
         return {
